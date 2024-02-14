@@ -1,0 +1,32 @@
+[tool.poetry]
+name = "sre-ascent"
+version = "0.1.0"
+description = ""
+authors = [
+    "Di Wang <dwan@redhat.com>",
+    "Anshul Verma <ansverma@redhat.com>",
+    "Jeff Yuan <jeyuan@redhat.com>",
+    "Samantha Jayasinghe <sjayasin@redhat.com>",
+    "Shawn Bai <sbai@redhat.com>",
+    "Tony Kong <tkong@redhat.com>",
+]
+readme = "README.md"
+packages = [
+    { include = "app" },
+]
+
+[tool.poetry.dependencies]
+langchain-community = "^0.0.19"
+langserve = {extras = ["server"], version = ">=0.0.41"}
+pydantic = "<2"
+python = "^3.11"
+python-dotenv = "^1.0.1"
+uvicorn = "^0.23.2"
+
+[tool.poetry.group.dev.dependencies]
+langchain-cli = ">=0.0.15"
+ruff = "^0.2.1"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
