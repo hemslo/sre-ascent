@@ -1,5 +1,7 @@
 # sre-ascent
 
+![build](https://github.com/hemslo/sre-ascent/actions/workflows/build.yml/badge.svg)
+
 ## Setup
 
 Ensure having Python 3.11 and poetry installed.
