@@ -21,6 +21,15 @@ Copy the `.env.example` file to `.env` and fill in the required environment vari
 cp .env.example .env
 ```
 
+## Setup Ollama
+
+Follow instructions in the [Ollama](https://github.com/ollama/ollama)
+
+```bash
+ollama serve
+ollama pull llama2
+```
+
 ## Launch LangServe
 
 ```bash
