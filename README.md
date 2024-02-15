@@ -29,7 +29,7 @@ Follow instructions in the [Ollama](https://github.com/ollama/ollama)
 
 ```bash
 ollama serve
-ollama pull llama2
+ollama pull mistral
 ```
 
 ## Launch LangServe

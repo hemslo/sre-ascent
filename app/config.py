@@ -7,7 +7,7 @@ load_dotenv()
 
 DEBUG = os.getenv("DEBUG", "0") == "1"
 VERBOSE = os.getenv("VERBOSE", "0") == "1"
-OLLAMA_CHAT_MODEL = os.getenv("OLLAMA_CHAT_MODEL", "llama2")
+OLLAMA_CHAT_MODEL = os.getenv("OLLAMA_CHAT_MODEL", "mistral")
 OLLAMA_URL = os.getenv("OLLAMA_URL", "http://localhost:11434")
 
 set_debug(DEBUG)
