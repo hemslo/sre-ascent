@@ -43,3 +43,9 @@ langchain serve
 ```shell
 docker compose up --build
 ```
+
+## Start Slack socket mode
+
+```shell
+slack_socket_mode
+```

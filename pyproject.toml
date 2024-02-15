@@ -24,11 +24,15 @@ langserve = {extras = ["server"], version = ">=0.0.41"}
 pydantic = "<2"
 python = "^3.11"
 python-dotenv = "^1.0.1"
+slack-bolt = "^1.18.1"
 uvicorn = "^0.23.2"
 
 [tool.poetry.group.dev.dependencies]
 langchain-cli = ">=0.0.15"
 ruff = "^0.2.1"
+
+[tool.poetry.scripts]
+slack_socket_mode = "app.slack_socket_mode:run"
 
 [build-system]
 requires = ["poetry-core"]
