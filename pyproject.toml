@@ -16,8 +16,10 @@ packages = [
 ]
 
 [tool.poetry.dependencies]
-langchain-community = "^0.0.19"
+langchain-community = "^0.0.20"
 langchain-experimental = "^0.0.51"
+langchain-openai = "^0.0.6"
+langgraph = "^0.0.24"
 langserve = {extras = ["server"], version = ">=0.0.41"}
 pydantic = "<2"
 python = "^3.11"

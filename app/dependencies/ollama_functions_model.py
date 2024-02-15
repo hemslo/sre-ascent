@@ -1,4 +1,4 @@
-from langchain_experimental.llms.ollama_functions import OllamaFunctions, DEFAULT_SYSTEM_TEMPLATE
+from langchain_experimental.llms.ollama_functions import OllamaFunctions
 
 from .ollama_chat_model import ollama_chat_model
 

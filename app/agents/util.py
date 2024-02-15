@@ -23,7 +23,10 @@ def create_ollama_functions_agent(
             "Prompt must have input variable `agent_scratchpad`, but wasn't found. "
             f"Found {prompt.input_variables} instead."
         )
-    llm_with_tools = llm.bind(functions=[DEFAULT_RESPONSE_FUNCTION] + [convert_to_openai_function(t) for t in tools])
+    llm_with_tools = llm.bind(
+        functions=[DEFAULT_RESPONSE_FUNCTION] + [convert_to_openai_function(t) for t in tools],
+        format="json",
+    )
     agent = (
         RunnablePassthrough.assign(
             agent_scratchpad=lambda x: adapt_to_ollama_messages(format_to_openai_function_messages(
