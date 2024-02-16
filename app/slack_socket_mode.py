@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 from app import config
-from app.dependencies.slack import slack_socket_model_handler
+from app.dependencies.slack_handler import slack_socket_model_handler
 
 
 def run():

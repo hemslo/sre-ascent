@@ -5,7 +5,6 @@ from langchain_core.messages import HumanMessage
 from slack_bolt import App
 from slack_bolt.adapter.fastapi import SlackRequestHandler
 from slack_bolt.adapter.socket_mode import SocketModeHandler
-from slack_sdk import WebClient
 
 from app import config
 from app.graph import graph
@@ -18,8 +17,6 @@ app = App(
 slack_request_handler = SlackRequestHandler(app)
 
 slack_socket_model_handler = SocketModeHandler(app, config.SLACK_APP_TOKEN)
-
-slack_client = WebClient(token=config.SLACK_BOT_TOKEN)
 
 
 def get_slack_request_handler() -> SlackRequestHandler:
