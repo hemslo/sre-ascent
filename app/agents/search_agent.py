@@ -35,7 +35,3 @@ search_engine_agent_executor = AgentExecutor(
     input_type=Input,
     output_type=Output,
 )
-#text = "What's the weather in Auckland Today"
-#messages = [HumanMessage(content=text)]
-
-#search_engine_agent_executor.invoke({"input": text})

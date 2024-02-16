@@ -10,6 +10,6 @@ def duckduckgo_search():
     """
     Get search result from Duckduckgo
     """
-    wrapper = DuckDuckGoSearchAPIWrapper(max_results=1)
+    wrapper = DuckDuckGoSearchAPIWrapper(max_results=10)
     search = DuckDuckGoSearchResults(api_wrapper=wrapper)
     return search
