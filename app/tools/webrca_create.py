@@ -6,8 +6,8 @@ from langchain_core.tools import tool
 
 
 @tool()
-def webrca_create(items: Sequence[Any], incident: str) -> str:
+def webrca_create():
     """
     create webrca incident
     """
-    return "/rca new  "+ incident
+    return "use /rca new for creating incident"
