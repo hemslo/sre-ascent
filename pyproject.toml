@@ -16,6 +16,7 @@ packages = [
 ]
 
 [tool.poetry.dependencies]
+duckduckgo-search = "^4.4.3"
 langchain-community = "^0.0.20"
 langchain-experimental = "^0.0.51"
 langchain-openai = "^0.0.6"
