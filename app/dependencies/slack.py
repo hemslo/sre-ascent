@@ -4,6 +4,7 @@ from fastapi import Depends
 from slack_bolt import App
 from slack_bolt.adapter.fastapi import SlackRequestHandler
 from slack_bolt.adapter.socket_mode import SocketModeHandler
+from slack_sdk import WebClient
 
 from app import config
 
@@ -16,12 +17,15 @@ slack_request_handler = SlackRequestHandler(app)
 
 slack_socket_model_handler = SocketModeHandler(app, config.SLACK_APP_TOKEN)
 
+slack_client = WebClient(token=config.SLACK_BOT_TOKEN)
+
 
 def get_slack_request_handler() -> SlackRequestHandler:
     return slack_request_handler
 
 
 SlackRequestHandlerDep = Annotated[SlackRequestHandler, Depends(get_slack_request_handler)]
+
 
 @app.event("message")
 def handle_message_events(body, say, logger):
