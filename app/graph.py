@@ -13,6 +13,7 @@ from pydantic import BaseModel
 
 from app.chains.supervisor import build_supervisor_chain
 from app.dependencies.openai_chat_model import openai_chat_model
+from app.tools.datetime_provider import datetime_provider
 from app.tools.random_number import random_number
 from app.tools.random_select import random_select
 from app.tools.webrca_create import webrca_create
@@ -70,6 +71,10 @@ GRAPH = {
     "SlackSearcher": {
         "tools": [slack_searcher],
         "system_prompt": "You are a slack searcher.",
+    },
+    "DatetimeProvider": {
+        "tools": [datetime_provider],
+        "system_prompt": "You are a datetime provider.",
     }
 }
 
