@@ -15,6 +15,7 @@ from app.chains.supervisor import build_supervisor_chain
 from app.dependencies.openai_chat_model import openai_chat_model
 from app.tools.random_number import random_number
 from app.tools.random_select import random_select
+from app.tools.duckduckgo_search import duckduckgo_search
 
 
 # https://github.com/langchain-ai/langgraph/blob/main/examples/multi_agent/agent_supervisor.ipynb
@@ -55,6 +56,10 @@ GRAPH = {
     "RandomSelect": {
         "tools": [random_select],
         "system_prompt": "You are a random selector.",
+    },
+    "GeneriaSearch": {
+        "tools": [duckduckgo_search],
+        "system_prompt": "You are a search engine for generic questions.",
     }
 }
 
