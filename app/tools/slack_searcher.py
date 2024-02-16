@@ -3,11 +3,8 @@ from slack_sdk import WebClient
 from slack_sdk.errors import SlackApiError
 from dotenv import load_dotenv
 from app import config
-
-load_dotenv()
-
-# Initialize a Slack WebClient instance
-slack_client = WebClient(token=config.SLACK_BOT_TOKEN)
+from langchain_core.tools import tool
+from app.dependencies.slack_client import slack_client
 
 def list_accessible_channels():
     try:
@@ -91,7 +88,11 @@ def search_in_channels(channels, channel_info, keyword):
         found_messages.extend(messages_in_channel)
     return found_messages
 
-def slack_searcher(keyword):
+@tool()
+def slack_searcher(keyword: str) -> str:
+    """
+    Search all public slack channels for the keyword
+    """
     # List all accessible channels
     accessible_channels = list_accessible_channels()
     
@@ -107,16 +108,3 @@ def slack_searcher(keyword):
     else:
         # print("No accessible channels found.")
         return []
-
-# if __name__ == "__main__":
-#     import re
-    
-#     search_keyword = "testing"
-#     found_messages = search_all_channels(search_keyword)
-    
-#     if found_messages:
-#         print("\nFound messages:")
-#         for channel_name, message_text in found_messages:
-#             print(f"In {channel_name}: {message_text}")
-#     else:
-#         print("No messages found matching the keyword.")
