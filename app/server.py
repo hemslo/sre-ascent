@@ -3,6 +3,7 @@ from fastapi.responses import RedirectResponse
 from langserve import add_routes
 
 from app.agents.random_number import random_number_agent_executor
+from app.agents.search_agent import search_engine_agent_executor
 from app.chains.extraction import extraction_chain
 from app.chains.supervisor import build_supervisor_chain
 from app.agents.webrca_create import webrca_create_agent_executor
@@ -42,6 +43,11 @@ add_routes(
     path="/webrca_create",
 )
 
+add_routes(
+    app,
+    search_engine_agent_executor,
+    path="/generic",
+)
 
 add_routes(
     app,

@@ -16,7 +16,8 @@ from app.dependencies.openai_chat_model import openai_chat_model
 from app.tools.random_number import random_number
 from app.tools.random_select import random_select
 from app.tools.webrca_create import webrca_create
-
+from app.tools.duckduckgo_search import duckduckgo_search
+from app.tools.slack_searcher import slack_searcher
 
 # https://github.com/langchain-ai/langgraph/blob/main/examples/multi_agent/agent_supervisor.ipynb
 
@@ -60,6 +61,14 @@ GRAPH = {
     "WebrcaCreate": {
         "tools": [webrca_create],
         "system_prompt": "You are a webrca incident creator.",
+    },
+    "GeneriaSearch": {
+        "tools": [duckduckgo_search],
+        "system_prompt": "You are a search engine for generic questions.",
+    },
+    "SlackSearcher": {
+        "tools": [slack_searcher],
+        "system_prompt": "You are a slack searcher.",
     }
 }
 

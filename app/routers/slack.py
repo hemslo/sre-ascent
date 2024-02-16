@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Request
 
-from app.dependencies.slack import SlackRequestHandlerDep
+from app.dependencies.slack_handler import SlackRequestHandlerDep
 
 router = APIRouter()
 
