@@ -1,12 +1,8 @@
-
-from collections.abc import Sequence
-from typing import Any
-
 from langchain_core.tools import tool
 
 
 @tool()
-def webrca_create():
+def webrca_create() -> str:
     """
     create webrca incident
     """

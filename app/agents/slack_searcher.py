@@ -34,6 +34,7 @@ class Input(BaseModel):
 class Output(BaseModel):
     output: Any
 
+
 slack_searcher_agent_executor = AgentExecutor(
     agent=slack_searcher_agent,
     tools=tools,

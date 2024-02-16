@@ -1,7 +1,6 @@
 from langchain_community.tools import DuckDuckGoSearchResults
 from langchain_community.utilities import DuckDuckGoSearchAPIWrapper
 
-
 from langchain_core.tools import tool
 
 

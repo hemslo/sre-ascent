@@ -1,11 +1,12 @@
+from typing import Any
+
 from langchain.agents import AgentExecutor
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
-from langchain.globals import set_debug
+from pydantic import BaseModel
+
 from .util import create_ollama_functions_agent
 from ..dependencies.ollama_functions_model import ollama_functions_model
 from ..tools.duckduckgo_search import duckduckgo_search
-from typing import Any
-from pydantic import BaseModel
 
 prompt = ChatPromptTemplate.from_messages(
     [
@@ -17,12 +18,14 @@ prompt = ChatPromptTemplate.from_messages(
     ]
 )
 
+
 class Input(BaseModel):
     input: str
 
 
 class Output(BaseModel):
     output: Any
+
 
 tools = [duckduckgo_search]
 llm = ollama_functions_model

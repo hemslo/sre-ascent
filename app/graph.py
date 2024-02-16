@@ -19,6 +19,7 @@ from app.tools.webrca_create import webrca_create
 from app.tools.duckduckgo_search import duckduckgo_search
 from app.tools.slack_searcher import slack_searcher
 
+
 # https://github.com/langchain-ai/langgraph/blob/main/examples/multi_agent/agent_supervisor.ipynb
 
 def create_agent(llm: ChatOpenAI, tools: list, system_prompt: str):
@@ -62,7 +63,7 @@ GRAPH = {
         "tools": [webrca_create],
         "system_prompt": "You are a webrca incident creator.",
     },
-    "GeneriaSearch": {
+    "GenericSearch": {
         "tools": [duckduckgo_search],
         "system_prompt": "You are a search engine for generic questions.",
     },

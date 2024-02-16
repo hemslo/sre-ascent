@@ -31,7 +31,7 @@ def invoke_graph(body) -> str:
     response = graph.invoke({
         "messages": [HumanMessage(content=text)],
     })
-    return response["messages"][-1].content
+    return "\n".join(message.content for message in response["messages"][1:])
 
 
 @app.event("message")
