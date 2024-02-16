@@ -34,6 +34,7 @@ class Input(BaseModel):
 class Output(BaseModel):
     output: Any
 
+
 random_number_agent_executor = AgentExecutor(
     agent=random_number_agent,
     tools=tools,

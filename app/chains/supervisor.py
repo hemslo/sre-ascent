@@ -3,6 +3,8 @@ from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 
 from app.dependencies.openai_chat_model import openai_chat_model
 
+# https://github.com/langchain-ai/langgraph/blob/main/examples/multi_agent/agent_supervisor.ipynb
+
 system_prompt = (
     "You are a supervisor tasked with managing a conversation between the"
     " following workers:  {members}. Given the following user request,"

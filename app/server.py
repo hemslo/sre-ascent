@@ -6,6 +6,7 @@ from app.agents.random_number import random_number_agent_executor
 from app.chains.extraction import extraction_chain
 from app.chains.supervisor import build_supervisor_chain
 from app.dependencies.ollama_chat_model import ollama_chat_model
+from app.graph import graph
 from app.routers import slack
 
 app = FastAPI()
@@ -38,6 +39,12 @@ add_routes(
     app,
     build_supervisor_chain(["SlackSummarizer", "SlackSearcher", "WebRCA"]),
     path="/supervisor",
+)
+
+add_routes(
+    app,
+    graph,
+    path="/graph",
 )
 
 app.include_router(slack.router)

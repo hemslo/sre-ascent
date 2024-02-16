@@ -4,8 +4,11 @@ from langchain_core.tools import tool
 
 
 @tool()
-def random_number() -> str:
+def random_number(
+    lower: int = 0,
+    upper: int = 100,
+) -> int:
     """
-    Generate a random number between 0 and 100
+    Generate a random number between lower (default 0) and upper (default 100)
     """
-    return str(random.randint(0, 100))
+    return random.randint(lower, upper)

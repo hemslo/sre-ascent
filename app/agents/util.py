@@ -27,11 +27,13 @@ def create_ollama_functions_agent(
         functions=[DEFAULT_RESPONSE_FUNCTION] + [convert_to_openai_function(t) for t in tools],
         format="json",
     )
+
+    def agent_scratchpad(x):
+        return adapt_to_ollama_messages(format_to_openai_function_messages(x["intermediate_steps"]))
+
     agent = (
         RunnablePassthrough.assign(
-            agent_scratchpad=lambda x: adapt_to_ollama_messages(format_to_openai_function_messages(
-                x["intermediate_steps"]
-            ))
+            agent_scratchpad=agent_scratchpad,
         )
         | prompt
         | llm_with_tools
