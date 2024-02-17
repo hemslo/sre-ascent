@@ -78,26 +78,14 @@ GRAPH = {
         "tools": slack_toolkit.get_tools(),
         "system_prompt": "You are a slack toolkit.",
     },
+    "ThreadSummary": {
+        "tools": [get_thread_msg],
+        "system_prompt": "You are a slack thread messages summarizer.",
+    },
     "WebrcaCreate": {
         "tools": [webrca_create],
         "system_prompt": "You are a webrca incident creator.",
     },
-    "DatetimeProvider": {
-        "tools": [datetime_provider],
-        "system_prompt": "You are a datetime provider.",
-    },
-    "ThreadSummary": {
-        "tools": [get_thread_msg],
-        "system_prompt": "You are a slack thread messages summarizer.",
-    },
-    "DatetimeProvider": {
-        "tools": [datetime_provider],
-        "system_prompt": "You are a datetime provider.",
-    },
-    "ThreadSummary": {
-        "tools": [get_thread_msg],
-        "system_prompt": "You are a slack thread messages summarizer.",
-    }
 }
 
 SUPERVISOR_MEMBERS = {k: v["system_prompt"] for k, v in GRAPH.items()}
