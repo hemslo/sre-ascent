@@ -49,3 +49,28 @@ docker compose up --build
 ```shell
 slack_socket_mode
 ```
+
+## Flow Architecture
+
+```mermaid
+flowchart LR
+    A((Request)) --> B(Supervisor)
+    B --> C{Select Agent}
+    C --> D1[DatetimeProvider]
+    D1 --> B
+    C --> D2[GenericSearch]
+    D2 --> B
+    C --> D3[RandomNumber]
+    D3 --> B
+    C --> D4[RandomSelect]
+    D4 --> B
+    C --> D5[SlackSearcher]
+    D5 --> B
+    C --> D6[SlackToolkit]
+    D6 --> B
+    C --> D7[ThreadSummary]
+    D7 --> B
+    C --> D8[WebrcaCreate]
+    D8 --> B
+    C --> |FINISH| E((Response))
+```

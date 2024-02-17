@@ -1,6 +1,5 @@
 import functools
 import operator
-from collections.abc import Mapping
 from typing import Annotated, Sequence, TypedDict
 
 from langchain.agents import create_openai_tools_agent, AgentExecutor
@@ -15,12 +14,12 @@ from pydantic import BaseModel
 from app.chains.supervisor import build_supervisor_chain
 from app.dependencies.openai_chat_model import openai_chat_model
 from app.tools.datetime_provider import datetime_provider
+from app.tools.duckduckgo_search import duckduckgo_search
 from app.tools.random_number import random_number
 from app.tools.random_select import random_select
+from app.tools.slack_searcher import slack_searcher
 from app.tools.slack_toolkit import slack_toolkit
 from app.tools.webrca_create import webrca_create
-from app.tools.duckduckgo_search import duckduckgo_search
-from app.tools.slack_searcher import slack_searcher
 
 
 # https://github.com/langchain-ai/langgraph/blob/main/examples/multi_agent/agent_supervisor.ipynb
@@ -54,6 +53,14 @@ class AgentState(TypedDict):
 SUPERVISOR_NAME = "Supervisor"
 
 GRAPH = {
+    "DatetimeProvider": {
+        "tools": [datetime_provider],
+        "system_prompt": "You are a datetime provider.",
+    },
+    "GenericSearch": {
+        "tools": [duckduckgo_search],
+        "system_prompt": "You are a search engine for generic questions.",
+    },
     "RandomNumber": {
         "tools": [random_number],
         "system_prompt": "You are a random number generator.",
@@ -62,25 +69,17 @@ GRAPH = {
         "tools": [random_select],
         "system_prompt": "You are a random selector.",
     },
-    "WebrcaCreate": {
-        "tools": [webrca_create],
-        "system_prompt": "You are a webrca incident creator.",
-    },
-    "GenericSearch": {
-        "tools": [duckduckgo_search],
-        "system_prompt": "You are a search engine for generic questions.",
+    "SlackSearcher": {
+        "tools": [slack_searcher],
+        "system_prompt": "You are a slack searcher.",
     },
     "SlackToolkit": {
         "tools": slack_toolkit.get_tools(),
         "system_prompt": "You are a slack toolkit.",
     },
-    "SlackSearcher": {
-        "tools": [slack_searcher],
-        "system_prompt": "You are a slack searcher.",
-    },
-    "DatetimeProvider": {
-        "tools": [datetime_provider],
-        "system_prompt": "You are a datetime provider.",
+    "WebrcaCreate": {
+        "tools": [webrca_create],
+        "system_prompt": "You are a webrca incident creator.",
     },
 }
 
