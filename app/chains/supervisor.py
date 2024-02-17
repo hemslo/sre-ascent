@@ -1,3 +1,6 @@
+import json
+from typing import Mapping
+
 from langchain.output_parsers.openai_functions import JsonOutputFunctionsParser
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 
@@ -14,8 +17,8 @@ system_prompt = (
 )
 
 
-def build_supervisor_chain(members):
-    options = ["FINISH"] + members
+def build_supervisor_chain(members: Mapping[str, str]):
+    options = ["FINISH"] + list(members.keys())
     function_def = {
         "name": "route",
         "description": "Select the next role.",
@@ -43,7 +46,7 @@ def build_supervisor_chain(members):
                 " Or should we FINISH? Select one of: {options}",
             ),
         ]
-    ).partial(options=str(options), members=", ".join(members))
+    ).partial(options=str(options), members=json.dumps(members))
 
     return (
         prompt

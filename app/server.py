@@ -8,7 +8,7 @@ from app.chains.extraction import extraction_chain
 from app.chains.supervisor import build_supervisor_chain
 from app.agents.webrca_create import webrca_create_agent_executor
 from app.dependencies.ollama_chat_model import ollama_chat_model
-from app.graph import graph
+from app.graph import graph, SUPERVISOR_MEMBERS
 from app.routers import slack
 
 app = FastAPI()
@@ -51,7 +51,7 @@ add_routes(
 
 add_routes(
     app,
-    build_supervisor_chain(["SlackSummarizer", "SlackSearcher", "WebRCA"]),
+    build_supervisor_chain(SUPERVISOR_MEMBERS),
     path="/supervisor",
 )
 

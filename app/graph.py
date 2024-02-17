@@ -1,5 +1,6 @@
 import functools
 import operator
+from collections.abc import Mapping
 from typing import Annotated, Sequence, TypedDict
 
 from langchain.agents import create_openai_tools_agent, AgentExecutor
@@ -16,6 +17,7 @@ from app.dependencies.openai_chat_model import openai_chat_model
 from app.tools.datetime_provider import datetime_provider
 from app.tools.random_number import random_number
 from app.tools.random_select import random_select
+from app.tools.slack_toolkit import slack_toolkit
 from app.tools.webrca_create import webrca_create
 from app.tools.duckduckgo_search import duckduckgo_search
 from app.tools.slack_searcher import slack_searcher
@@ -68,6 +70,10 @@ GRAPH = {
         "tools": [duckduckgo_search],
         "system_prompt": "You are a search engine for generic questions.",
     },
+    "SlackToolkit": {
+        "tools": slack_toolkit.get_tools(),
+        "system_prompt": "You are a slack toolkit.",
+    },
     "SlackSearcher": {
         "tools": [slack_searcher],
         "system_prompt": "You are a slack searcher.",
@@ -75,13 +81,14 @@ GRAPH = {
     "DatetimeProvider": {
         "tools": [datetime_provider],
         "system_prompt": "You are a datetime provider.",
-    }
+    },
 }
+
+SUPERVISOR_MEMBERS = {k: v["system_prompt"] for k, v in GRAPH.items()}
 
 
 def build_graph() -> Pregel:
-    members = list(GRAPH.keys())
-    supervisor_chain = build_supervisor_chain(members)
+    supervisor_chain = build_supervisor_chain(SUPERVISOR_MEMBERS)
 
     workflow = StateGraph(AgentState)
     for member, config in GRAPH.items():
@@ -89,11 +96,10 @@ def build_graph() -> Pregel:
         workflow.add_node(member, functools.partial(agent_node, agent=agent, name=member))
     workflow.add_node(SUPERVISOR_NAME, supervisor_chain)
 
-    for member in members:
+    for member in GRAPH:
         workflow.add_edge(member, SUPERVISOR_NAME)
 
-    conditional_map = {k: k for k in members}
-    conditional_map["FINISH"] = END
+    conditional_map = {k: k for k in GRAPH} | {"FINISH": END}
     workflow.add_conditional_edges(SUPERVISOR_NAME, lambda x: x["next"], conditional_map)
     workflow.set_entry_point(SUPERVISOR_NAME)
 
