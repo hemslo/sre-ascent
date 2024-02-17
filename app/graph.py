@@ -20,6 +20,7 @@ from app.tools.random_select import random_select
 from app.tools.slack_searcher import slack_searcher
 from app.tools.slack_toolkit import slack_toolkit
 from app.tools.webrca_create import webrca_create
+from app.tools.get_thread_msg import get_thread_msg
 
 
 # https://github.com/langchain-ai/langgraph/blob/main/examples/multi_agent/agent_supervisor.ipynb
@@ -81,6 +82,22 @@ GRAPH = {
         "tools": [webrca_create],
         "system_prompt": "You are a webrca incident creator.",
     },
+    "DatetimeProvider": {
+        "tools": [datetime_provider],
+        "system_prompt": "You are a datetime provider.",
+    },
+    "ThreadSummary": {
+        "tools": [get_thread_msg],
+        "system_prompt": "You are a slack thread messages summarizer.",
+    },
+    "DatetimeProvider": {
+        "tools": [datetime_provider],
+        "system_prompt": "You are a datetime provider.",
+    },
+    "ThreadSummary": {
+        "tools": [get_thread_msg],
+        "system_prompt": "You are a slack thread messages summarizer.",
+    }
 }
 
 SUPERVISOR_MEMBERS = {k: v["system_prompt"] for k, v in GRAPH.items()}
