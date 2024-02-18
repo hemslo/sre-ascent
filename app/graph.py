@@ -84,7 +84,7 @@ GRAPH = {
     },
     "WebrcaCreate": {
         "tools": [webrca_create],
-        "system_prompt": "You are a webrca incident creator.",
+        "system_prompt": "You are a webrca incident creator. Either create the incident or return command to create.",
     },
 }
 
