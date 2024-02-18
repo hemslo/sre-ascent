@@ -1,3 +1,4 @@
+import json
 from typing import Annotated
 
 from fastapi import Depends
@@ -27,9 +28,14 @@ SlackRequestHandlerDep = Annotated[SlackRequestHandler, Depends(get_slack_reques
 
 
 def invoke_graph(body) -> str:
-    text = body.get('event', {}).get('text', '')
+    payload = {
+        "text": body["event"].get("text"),
+        "channel": body["event"].get("channel"),
+        "ts": body["event"].get("ts"),
+        "thread_ts": body["event"].get("thread_ts"),
+    }
     response = graph.invoke({
-        "messages": [HumanMessage(content=text)],
+        "messages": [HumanMessage(content=json.dumps(payload))],
     })
     return "\n".join(message.content for message in response["messages"][1:])
 
@@ -40,7 +46,7 @@ def handle_message_events(body, say, logger):
         return
     logger.info(body)
     response = invoke_graph(body)
-    say(response)
+    say(response, thread_ts=body['event']['ts'])
 
 
 # Define an event listener for "app_mention" events
@@ -48,4 +54,4 @@ def handle_message_events(body, say, logger):
 def handle_app_mention_events(body, say, logger):
     logger.info(body)
     response = invoke_graph(body)
-    say(response)
+    say(response, thread_ts=body['event']['ts'])
