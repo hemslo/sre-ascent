@@ -1,13 +1,13 @@
 import re
 from slack_sdk.errors import SlackApiError
 from langchain_core.tools import tool
-from app.dependencies.slack_client import slack_client
+from app.dependencies.slack_client import slack_bot_client, slack_user_client
 
 
 def get_user_name(user_id):
     try:
         # Call the users.info method to fetch user information
-        response = slack_client.users_info(user=user_id)
+        response = slack_bot_client.users_info(user=user_id)
 
         # Check if the API call was successful
         if response["ok"]:
@@ -29,7 +29,7 @@ def get_user_name(user_id):
 def search_messages(keyword):
     try:
         # Call the search.messages method to search for messages containing the keyword
-        response = slack_client.search_messages(query=keyword)
+        response = slack_user_client.search_messages(query=keyword)
         
         # Check if the API call was successful
         if response["ok"]:
